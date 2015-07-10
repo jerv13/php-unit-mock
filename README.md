@@ -41,7 +41,6 @@ namespace MyPackage;
 
 class MyClassMock extends \PhpUnitMock\Mock 
 {
-
     /**
      * Build the default mock configuration
      *
@@ -61,7 +60,6 @@ class MyClassMock extends \PhpUnitMock\Mock
      */
     abstract public function buildMock() 
     {
-    
             /** @var \MyPackage\MyClass $mock */
             $mock = $this->getMockBuilder('\MyPackage\MyClass')
                 ->disableOriginalConstructor()
@@ -77,20 +75,19 @@ class MyClassMock extends \PhpUnitMock\Mock
 
 #### Usage ####
 
-```php
 
 ```php
 namespace MyPackage;
 
-class MyClassTest extends \PHPUnit_Framework_TestCase {
-    
-    public function testMyMethod() {
-    
+class MyClassTest extends \PHPUnit_Framework_TestCase 
+{
+    public function testMyMethod() 
+    {
         // Default Mock - returns 'SOME_TEST_VALUE'
         $mock = MyClassMock::build();
         
-        $mock->myMethod()
         // Returns 'SOME_TEST_VALUE'
+        $mock->myMethod();
         
         // Over-ride Mock return value
         $mock = MyClassMock::build(
@@ -99,8 +96,8 @@ class MyClassTest extends \PHPUnit_Framework_TestCase {
             ];
         );
         
-        $mock->myMethod()
         // Returns 'DIFFERENT_TEST_VALUE'
+        $mock->myMethod();
     }
 }
 
