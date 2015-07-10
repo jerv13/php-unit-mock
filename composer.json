@@ -1,0 +1,30 @@
+{
+  "name": "php-unit-mock",
+  "description": "Base Class for creating reusable PHPUnit Mock Objects",
+  "type": "library",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "phpunit",
+    "mock",
+    "class",
+    "object"
+  ],
+  "minimum-stability": "stable",
+  "homepage": "https://github.com/jerv13/php-unit-mock",
+  "authors": [
+    {
+      "name": "James Jervis",
+      "email": "james@jervdesign.com",
+      "homepage": "https://github.com/jerv13"
+    }
+  ],
+  "require": {
+    "php": ">=5.4",
+    "phpunit/phpunit": ">=4.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "PhpUnitMock\\": "src/PhpUnitMock/"
+    }
+  }
+}
