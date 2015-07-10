@@ -8,3 +8,11 @@ Base Class for creating reusable PHPUnit Mock Objects
 ## Example ##
 
 
+
+
+
+
+
+## ToDo ##
+
+- Finish composer setup

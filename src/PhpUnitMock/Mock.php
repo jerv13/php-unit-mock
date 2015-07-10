@@ -26,7 +26,7 @@ abstract class Mock extends \PHPUnit_Framework_TestCase
     /**
      * Factory method
      *
-     * @param array $config
+     * @param array $config Config values
      *
      * @return mixed
      */
@@ -39,11 +39,15 @@ abstract class Mock extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @var array Actual values for mock
+     * Actual values for mock
+     *
+     * @var array
      */
     protected $config = [];
 
     /**
+     * Construct with specific config values
+     *
      * @param array $config Configs for over-riding default config
      */
     public function __construct($config = [])
@@ -53,7 +57,8 @@ abstract class Mock extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * buildDefaultConfig
+     * Build the default mock configuration
+     * - Over-ride this in your mock class
      *
      * @return array
      */
@@ -63,7 +68,7 @@ abstract class Mock extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * buildMock
+     * Build PHPUnit Mock in this method using $this->config for return values
      *
      * @return \PHPUnit_Framework_MockObject_MockObject|mixed
      */
