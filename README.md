@@ -54,11 +54,12 @@ class MyClassMock extends \PhpUnitMock\Mock
     }
 
     /**
+     * @override
      * Build PHPUnit Mock in this method
      *
      * @return \PHPUnit_Framework_MockObject_MockObject|mixed
      */
-    abstract public function buildMock() 
+    public function buildMock() 
     {
             /** @var \MyPackage\MyClass $mock */
             $mock = $this->getMockBuilder('\MyPackage\MyClass')
