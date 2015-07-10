@@ -82,10 +82,10 @@ class MyClassTest extends \PHPUnit_Framework_TestCase
 {
     public function testMyMethod() 
     {
-        // Default Mock - returns 'SOME_TEST_VALUE'
+        // Default Mock with default config 
         $mock = MyClassMock::build();
         
-        // Returns 'SOME_TEST_VALUE'
+        // Returns 'SOME_TEST_VALUE' from default config
         $mock->myMethod();
         
         // Over-ride Mock return value
@@ -95,7 +95,7 @@ class MyClassTest extends \PHPUnit_Framework_TestCase
             ];
         );
         
-        // Returns 'DIFFERENT_TEST_VALUE'
+        // Returns 'DIFFERENT_TEST_VALUE' from default local config
         $mock->myMethod();
     }
 }
