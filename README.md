@@ -25,10 +25,8 @@ namespace MyPackage;
 
 class MyClass 
 {
-
     public function myMethod() 
     {
-    
         return 'someValue'
     }
 }
