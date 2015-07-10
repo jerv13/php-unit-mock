@@ -90,12 +90,13 @@ class MyClassTest extends \PHPUnit_Framework_TestCase
         
         // Over-ride Mock return value
         $mock = MyClassMock::build(
+            // Add local config, this will be merged with the default config
             [
                 'myMethod' => 'DIFFERENT_TEST_VALUE'
             ];
         );
         
-        // Returns 'DIFFERENT_TEST_VALUE' from default local config
+        // Returns 'DIFFERENT_TEST_VALUE' from local config
         $mock->myMethod();
     }
 }
