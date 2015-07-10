@@ -18,12 +18,6 @@ namespace PhpUnitMock;
 abstract class Mock extends \PHPUnit_Framework_TestCase
 {
     /**
-     * Autoload flag
-     * @var bool
-     */
-    protected static $autoloadComplete = false;
-
-    /**
      * Factory method
      *
      * @param array $config Config values
