@@ -1,5 +1,5 @@
 {
-  "name": "php-unit-mock",
+  "name": "jervdesign/php-unit-mock",
   "description": "Base Class for creating reusable PHPUnit Mock Objects",
   "type": "library",
   "license": "BSD-3-Clause",
