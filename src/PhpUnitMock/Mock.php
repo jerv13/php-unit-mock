@@ -22,12 +22,24 @@ abstract class Mock extends \PHPUnit_Framework_TestCase
      *
      * @param array $config Config values
      *
+     * @return $this
+     */
+    public static function get($config = [])
+    {
+        $class = get_called_class();
+        return new $class($config);
+    }
+
+    /**
+     * Mock Factory method
+     *
+     * @param array $config Config values
+     *
      * @return mixed
      */
     public static function build($config = [])
     {
-        $class = get_called_class();
-        $mock = new $class($config);
+        $mock = static::get($config);
 
         return $mock->buildMock();
     }
