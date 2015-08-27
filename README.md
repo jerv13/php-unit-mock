@@ -4,7 +4,7 @@ PhpUnitMock
 Base Class for creating reusable PHPUnit Mock Objects
 - Allows for simple sharing of mocks (build them once)
 - Allows simple array config for any mock return
-- Mock can follow class structure of your project
+- Mocks can follow class structure of your project
 
 ```
     - src
@@ -60,7 +60,7 @@ class MyClassMock extends \PhpUnitMock\Mock
     public function buildMock() 
     {
             /** @var \MyPackage\MyClass $mock */
-            $mock = $this->getMockBuilder('\MyPackage\MyClass')
+            $mock = $this->testCase->getMockBuilder('\MyPackage\MyClass')
                 ->disableOriginalConstructor()
                 ->getMock();
     
@@ -83,13 +83,14 @@ class MyClassTest extends \PHPUnit_Framework_TestCase
     public function testMyMethod() 
     {
         // Default Mock with default config 
-        $mock = MyClassMock::build();
+        $mock = MyClassMock::build($this);
         
         // Returns 'SOME_TEST_VALUE' from default config
         $mock->myMethod();
         
         // Over-ride Mock return value
         $mock = MyClassMock::build(
+            $this,
             // Add local config, this will be merged with the default config
             [
                 'myMethod' => 'DIFFERENT_TEST_VALUE'

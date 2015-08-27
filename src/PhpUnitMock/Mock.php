@@ -15,31 +15,41 @@ namespace PhpUnitMock;
  * @version   Release: <package_version>
  * @link      https://github.com/jerv13
  */
-abstract class Mock extends \PHPUnit_Framework_TestCase
+abstract class Mock
 {
+    /**
+     * Test Case
+     *
+     * @var \PHPUnit_Framework_TestCase
+     */
+    protected $testCase;
+
     /**
      * Factory method
      *
-     * @param array $config Config values
+     * @param \PHPUnit_Framework_TestCase $testCase Test Case
+     * @param array                       $config   Config values
      *
-     * @return $this
+     * @return mixed
      */
-    public static function get($config = [])
+    public static function get(\PHPUnit_Framework_TestCase $testCase, $config = [])
     {
         $class = get_called_class();
-        return new $class($config);
+
+        return new $class($testCase, $config);
     }
 
     /**
      * Mock Factory method
      *
-     * @param array $config Config values
+     * @param \PHPUnit_Framework_TestCase $testCase Test Case
+     * @param array                       $config   Config values
      *
      * @return mixed
      */
-    public static function build($config = [])
+    public static function build(\PHPUnit_Framework_TestCase $testCase, $config = [])
     {
-        $mock = static::get($config);
+        $mock = static::get($testCase, $config);
 
         return $mock->buildMock();
     }
@@ -54,10 +64,12 @@ abstract class Mock extends \PHPUnit_Framework_TestCase
     /**
      * Construct with specific config values
      *
-     * @param array $config Configs for over-riding default config
+     * @param \PHPUnit_Framework_TestCase $testCase Test Case
+     * @param array                       $config   Configs for over-riding defaults
      */
-    public function __construct($config = [])
+    public function __construct(\PHPUnit_Framework_TestCase $testCase, $config = [])
     {
+        $this->testCase = $testCase;
         $defaultConfig = $this->buildDefaultConfig();
         $this->config = array_merge($defaultConfig, $config);
     }
@@ -76,7 +88,7 @@ abstract class Mock extends \PHPUnit_Framework_TestCase
     /**
      * Build PHPUnit Mock in this method using $this->config for return values
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|mixed
+     * @return \PHPUnit_Framework_MockObject_MockObject
      */
     abstract public function buildMock();
 }
