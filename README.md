@@ -176,7 +176,3 @@ class MyClassTest extends \PHPUnit_Framework_TestCase
     }
 }
 ```
-
-## ToDo ##
-
-- Finish composer setup
