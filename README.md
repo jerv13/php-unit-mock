@@ -32,7 +32,50 @@ class MyClass
 }
 ```
 
-#### Mock Setup ####
+#### Simple Mock Setup ####
+
+Use this when your config is one-to-one with the mocks methods and results
+
+```php
+namespace MyPackage;
+
+class MyClassMock extends \PhpUnitMock\Mock 
+{
+    /**
+     * NameSpace and Name of the class to mock
+     *
+     * @var null
+     */
+    protected $className = '\MyPackage\MyClass';
+    
+    /**
+     * Build the default mock configuration
+     *
+     * @return array
+     */
+    public function buildDefaultConfig()
+    {
+        return [
+            'myMethod' => 'SOME_TEST_VALUE'
+        ];
+    }
+
+    /**
+     * @override to show proper type hinting in IDE
+     * Build PHPUnit Mock in this method
+     *
+     * @return \MyPackage\MyClass
+     */
+    public function buildMock() 
+    {
+            return parent::buildMock();
+    }
+}
+```
+
+#### Custom Mock Setup ####
+
+Use this when you require special cases for you mock results
 
 ```php
 namespace MyPackage;
@@ -52,10 +95,10 @@ class MyClassMock extends \PhpUnitMock\Mock
     }
 
     /**
-     * @override
+     * @override to show proper type hinting in IDE
      * Build PHPUnit Mock in this method
      *
-     * @return \PHPUnit_Framework_MockObject_MockObject|mixed
+     * @return \MyPackage\MyClass
      */
     public function buildMock() 
     {
@@ -67,13 +110,14 @@ class MyClassMock extends \PhpUnitMock\Mock
             $mock->method('myMethod')
                 ->will($this->returnValue($this->config['myMethod']));
                 
+            // Custom mock building here
+                
             return $mock;
     }
 }
 ```
 
-#### Usage ####
-
+#### Simple Usage ####
 
 ```php
 namespace MyPackage;
@@ -101,7 +145,36 @@ class MyClassTest extends \PHPUnit_Framework_TestCase
         $mock->myMethod();
     }
 }
+```
 
+#### Usage with Type Hints in IDE ####
+
+```php
+namespace MyPackage;
+
+class MyClassTest extends \PHPUnit_Framework_TestCase 
+{
+    public function testMyMethod() 
+    {
+        // Default Mock with default config 
+        $mock = MyClassMock::get($this)->buildMock();
+        
+        // Returns 'SOME_TEST_VALUE' from default config
+        $mock->myMethod();
+        
+        // Over-ride Mock return value
+        $mock = MyClassMock::get(
+            $this,
+            // Add local config, this will be merged with the default config
+            [
+                'myMethod' => 'DIFFERENT_TEST_VALUE'
+            ];
+        )->buildMock();
+        
+        // Returns 'DIFFERENT_TEST_VALUE' from local config
+        $mock->myMethod();
+    }
+}
 ```
 
 ## ToDo ##

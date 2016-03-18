@@ -18,6 +18,12 @@ namespace PhpUnitMock;
 abstract class Mock
 {
     /**
+     * NameSpace and Name of the class to mock
+     *
+     * @var null
+     */
+    protected $className = null;
+    /**
      * Test Case
      *
      * @var \PHPUnit_Framework_TestCase
@@ -87,8 +93,26 @@ abstract class Mock
 
     /**
      * Build PHPUnit Mock in this method using $this->config for return values
+     * Over-ride this for custom mock building
      *
      * @return \PHPUnit_Framework_MockObject_MockObject
+     * @throws \Exception
      */
-    abstract public function buildMock();
+    public function buildMock()
+    {
+        if (empty($this->className)) {
+            throw new \Exception('Class name is required for default buildMock');
+        }
+        $config = $this->config;
+        $mock = $this->testCase->getMockBuilder($this->className)
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        foreach ($config as $key => $returnValue) {
+            $mock->method($key)
+                ->will($this->testCase->returnValue($returnValue));
+        }
+
+        return $mock;
+    }
 }
