@@ -102,17 +102,17 @@ class MyClassMock extends \PhpUnitMock\Mock
      */
     public function buildMock() 
     {
-            /** @var \MyPackage\MyClass $mock */
-            $mock = $this->testCase->getMockBuilder('\MyPackage\MyClass')
-                ->disableOriginalConstructor()
-                ->getMock();
-    
-            $mock->method('myMethod')
-                ->will($this->returnValue($this->config['myMethod']));
-                
-            // Custom mock building here
-                
-            return $mock;
+        /** @var \MyPackage\MyClass $mock */
+        $mock = $this->testCase->getMockBuilder('\MyPackage\MyClass')
+            ->disableOriginalConstructor()
+            ->getMock();
+
+        $mock->method('myMethod')
+            ->will($this->returnValue($this->config['myMethod']));
+            
+        // Custom mock building here
+            
+        return $mock;
     }
 }
 ```
